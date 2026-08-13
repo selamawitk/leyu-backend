@@ -127,7 +127,7 @@ importers:
         version: 9.0.3
       leyu-api:
         specifier: 'file:'
-        version: file:(@bull-board/ui@6.21.3)(@faker-js/faker@10.4.0)(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)(chokidar@4.0.3)(express@5.2.1)(nodemailer@8.0.7)(passport@0.7.0)(svgo@4.0.1)(terser@5.46.2)(ts-node@10.9.2(@swc/core@1.15.33)(@types/node@22.19.17)(typescript@5.9.3))(typescript@5.9.3)
+        version: file:(@bull-board/ui@6.21.3)(@faker-js/faker@10.4.0)(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)(chokidar@4.0.3)(express@5.2.1)(nodemailer@8.0.7)(svgo@4.0.1)(terser@5.46.2)(ts-node@10.9.2(@swc/core@1.15.33)(@types/node@22.19.17)(typescript@5.9.3))(typescript@5.9.3)
       lodash:
         specifier: ^4.17.21
         version: 4.18.1
@@ -11865,7 +11865,7 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  leyu-api@file:(@bull-board/ui@6.21.3)(@faker-js/faker@10.4.0)(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)(chokidar@4.0.3)(express@5.2.1)(nodemailer@8.0.7)(passport@0.7.0)(svgo@4.0.1)(terser@5.46.2)(ts-node@10.9.2(@swc/core@1.15.33)(@types/node@22.19.17)(typescript@5.9.3))(typescript@5.9.3):
+  leyu-api@file:(@bull-board/ui@6.21.3)(@faker-js/faker@10.4.0)(@grpc/grpc-js@1.14.3)(@grpc/proto-loader@0.8.0)(chokidar@4.0.3)(express@5.2.1)(nodemailer@8.0.7)(svgo@4.0.1)(terser@5.46.2)(ts-node@10.9.2(@swc/core@1.15.33)(@types/node@22.19.17)(typescript@5.9.3))(typescript@5.9.3):
     dependencies:
       '@aws-sdk/client-s3': 3.1043.0
       '@aws-sdk/lib-storage': 3.1043.0(@aws-sdk/client-s3@3.1043.0)
@@ -11916,6 +11916,7 @@ snapshots:
       nestjs-throttler-storage-redis: 0.5.1(@nestjs/common@11.1.19(class-transformer@0.5.1)(class-validator@0.14.4)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)(@nestjs/throttler@6.5.0(@nestjs/common@11.1.19(class-transformer@0.5.1)(class-validator@0.14.4)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)(reflect-metadata@0.2.2))(ioredis@5.10.1)(reflect-metadata@0.2.2)
       nestjs-zod: 4.3.1(@nestjs/common@11.1.19(class-transformer@0.5.1)(class-validator@0.14.4)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)(@nestjs/swagger@11.4.2(@nestjs/common@11.1.19(class-transformer@0.5.1)(class-validator@0.14.4)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.19)(class-transformer@0.5.1)(class-validator@0.14.4)(reflect-metadata@0.2.2))(zod@3.25.76)
       p-limit: 7.3.0
+      passport: 0.7.0
       passport-jwt: 4.0.1
       pg: 8.20.0
       reflect-metadata: 0.2.2
@@ -11960,7 +11961,6 @@ snapshots:
       - nodemailer
       - objection
       - oracledb
-      - passport
       - pg-native
       - pg-query-stream
       - purgecss
