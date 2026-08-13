@@ -44,8 +44,7 @@ async function bootstrap() {
   // Create your queues
   const myQueue = new Queue('file-upload', {
     connection: {
-      host: configService.get<string>('REDIS_HOST'),
-      port: Number(configService.get<string>('REDIS_PORT') || '6379'),
+      url: configService.get<string>('REDIS_URL'),
     },
   });
 
@@ -65,14 +64,14 @@ async function bootstrap() {
   app.use('/admin/queues', (req, res, next) => adminAuthMiddleware.use(req, res, next));
   app.use('/admin/queues', serverAdapter.getRouter());
 
-  // Shut down the app if RabbitMQ connection is lost
+  // Don't kill the app if RabbitMQ drops: the module reconnects automatically
+  // (reconnectTimeInSeconds). Just log and keep serving.
   const amqpConnection = app.get(AmqpConnection);
   amqpConnection.managedConnection.on('disconnect', ({ err }) => {
     Logger.error(
-      `RabbitMQ connection lost: ${err?.message ?? 'unknown error'}. Shutting down.`,
+      `RabbitMQ connection lost: ${err?.message ?? 'unknown error'}. Auto-reconnecting.`,
       'RabbitMQ',
     );
-    process.exit(1);
   });
 
   await app.listen(process.env.PORT ?? 3000);
