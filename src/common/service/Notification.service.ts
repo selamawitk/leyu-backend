@@ -67,4 +67,18 @@ export class NotificationService {
       { is_read: true },
     );
   }
+
+  async markRead(id: string, userId: string): Promise<void> {
+    await this.notificationRepository.update(
+      { id, user_id: userId },
+      { is_read: true },
+    );
+  }
+
+  async markAllRead(userId: string): Promise<void> {
+    await this.notificationRepository.update(
+      { user_id: userId },
+      { is_read: true },
+    );
+  }
 }
