@@ -9,6 +9,8 @@ export class Migration1779462317544 implements MigrationInterface {
     await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "setting"`);
     await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "task_distribution"`);
 
+        await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
+
         await queryRunner.query(`CREATE TABLE "setting"."organization" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "name" character varying NOT NULL, "alternative_names" jsonb, "email" character varying NOT NULL, "phone" character varying NOT NULL, "address" character varying NOT NULL, "created_date" TIMESTAMP NOT NULL DEFAULT now(), "updated_date" TIMESTAMP NOT NULL DEFAULT now(), "deletedAt" TIMESTAMP, CONSTRAINT "UQ_c21e615583a3ebbb0977452afb0" UNIQUE ("name"), CONSTRAINT "UQ_5d06de67ef6ab02cbd938988bb1" UNIQUE ("email"), CONSTRAINT "PK_472c1f99a32def1b0abb219cd67" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TYPE "public"."invitation_link_role_enum" AS ENUM('Contributor', 'Facilitator', 'Reviewer')`);
         await queryRunner.query(`CREATE TABLE "invitation_link" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "project_id" uuid, "task_id" uuid, "expiry_date" TIMESTAMP NOT NULL, "max_invitations" integer, "current_invitations" integer NOT NULL DEFAULT '0', "role" "public"."invitation_link_role_enum", "organization_id" uuid, "created_by" character varying, "created_date" TIMESTAMP NOT NULL DEFAULT now(), CONSTRAINT "PK_63004f50fe26217b1321888c574" PRIMARY KEY ("id"))`);
