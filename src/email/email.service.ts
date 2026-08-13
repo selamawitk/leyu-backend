@@ -1,20 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { MailerService as MailService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class EmailService {
+  private readonly logger = new Logger(EmailService.name);
   constructor(private readonly mailerService: MailService) {}
   async sendEmail(to: string, subject: string, body: string): Promise<void> {
     try {
-      const result = await this.mailerService.sendMail({
+      await this.mailerService.sendMail({
         sender:'Leyu',
         to,
         subject,
         html: body,
       });
-      return;
     } catch (error) {
-      throw new Error('Failed to send email');
+      // Email is non-critical: log and never throw so the app stays up.
+      this.logger.error(
+        `Failed to send email to ${to} (${subject}): ${(error as Error)?.message ?? error}`,
+      );
     }
   }
   async sendLeyuAccountEmail(
@@ -24,11 +27,12 @@ export class EmailService {
     tempPassword: string,
     dashboardUrl: string,
   ) {
-    await this.mailerService.sendMail({
-      sender:'Leyu',
-      to,
-      subject: 'Your Leyu Platform Account Has Been Created',
-      html: `
+    try {
+      await this.mailerService.sendMail({
+        sender:'Leyu',
+        to,
+        subject: 'Your Leyu Platform Account Has Been Created',
+        html: `
         <p>Your account for the Leyu Platform has been successfully created and assigned to the <b>${role}</b> role.</p>
 
         <p>Please use the following temporary credentials to access your account:</p>
@@ -49,7 +53,7 @@ export class EmailService {
           <li><b>Dashboard Access:</b> You can now begin managing tasks, teams, or system data based on your <b>${role}</b> permissions.</li>
         </ul>
       `,
-      text: `
+        text: `
 Your Leyu Platform account has been created with the role: ${role}.
 
 Username: ${phoneNumber}
@@ -60,6 +64,12 @@ ${dashboardUrl}
 
 Please log in and change your password immediately.
       `,
-    });
+      });
+    } catch (error) {
+      // Email is non-critical: log and never throw so the app stays up.
+      this.logger.error(
+        `Failed to send account email to ${to} (${role}): ${(error as Error)?.message ?? error}`,
+      );
+    }
   }
 }
