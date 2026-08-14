@@ -1,5 +1,4 @@
 import { Injectable, OnModuleDestroy } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { ThrottlerStorage } from '@nestjs/throttler';
 import { ThrottlerStorageRecord } from '@nestjs/throttler/dist/throttler-storage-record.interface';
 import Redis from 'ioredis';
@@ -10,10 +9,8 @@ export class RedisThrottlerStorage
 {
   private readonly redis: Redis;
 
-  constructor(private readonly configService: ConfigService) {
-    this.redis = new Redis(
-      this.configService.get<string>('REDIS_URL') as string,
-    );
+  constructor(url: string) {
+    this.redis = new Redis(url);
   }
 
   async increment(

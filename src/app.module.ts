@@ -29,7 +29,7 @@ import configuration from './config/configuration';
 import { I18nModule, QueryResolver } from 'nestjs-i18n';
 import { YcI18nModule } from './yc-i18n/yc-i18n.module';
 import * as path from 'path';
-import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis';
+import { RedisThrottlerStorage } from './auth/throttler/redis-throttler.storage';
 import { APP_GUARD } from '@nestjs/core';
 import { HttpOnlyThrottlerGuard } from './auth/guard/otp-throttler.guard';
 import { ChatbotModule } from './chatbot/chatbot.module';
@@ -113,7 +113,7 @@ import { ChatbotModule } from './chatbot/chatbot.module';
           limit: 400,
         },
       ],
-      storage: new ThrottlerStorageRedisService(
+      storage: new RedisThrottlerStorage(
         process.env.REDIS_URL ||
           `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
       ),

@@ -5,6 +5,9 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "^22.0.0"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -74,7 +77,6 @@
     "mysql": "^2.18.1",
     "nest-casl": "^1.9.15",
     "nestjs-i18n": "^10.6.0",
-    "nestjs-throttler-storage-redis": "^0.5.1",
     "nestjs-zod": "^4.3.1",
     "p-limit": "^7.3.0",
     "passport": "^0.7.0",
