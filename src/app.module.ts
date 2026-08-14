@@ -39,7 +39,7 @@ import { ChatbotModule } from './chatbot/chatbot.module';
       isGlobal: true, //  Makes ConfigModule available in all modules,
       load: [configuration],
       validationSchema: Joi.object({
-        PORT: Joi.number().required(),
+        PORT: Joi.number().default(3000),
         NODE_ENV: Joi.string()
           .required()
           .valid('development', 'production', 'test', 'provision'),
