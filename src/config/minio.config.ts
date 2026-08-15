@@ -3,7 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { S3Client } from '@aws-sdk/client-s3';
 import multerS3 from 'multer-s3';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, join } from 'path';
+import { tmpdir } from 'os';
 import crypto from 'crypto';
 
 ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true });
@@ -50,7 +51,7 @@ export const multerImageS3Storage = multerS3({
 });
 export const multerAudioDiskConfig = {
   storage: diskStorage({
-    destination: './uploads',
+    destination: join(tmpdir(), 'leyu-uploads'),
     filename: (_req, file, cb) => {
       const uniqueName = `${crypto.randomUUID().split('-')[0]}-${crypto.randomUUID()}${extname(file.originalname)}`;
       cb(null, uniqueName);
