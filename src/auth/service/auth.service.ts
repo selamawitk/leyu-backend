@@ -78,11 +78,6 @@ export class AuthService {
       );
       user.profile_picture = pic_url;
     }
-    if (user.role.name == RoleEnum.CONTRIBUTOR) {
-      throw new UnauthorizedException(
-        'Contributors are not allowed to sign in',
-      );
-    }
     const { access_token, refresh_token } = await this.generateToken(
       user.id,
       user.email,
