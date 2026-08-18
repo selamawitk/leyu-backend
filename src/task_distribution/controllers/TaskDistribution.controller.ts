@@ -70,10 +70,10 @@ export class TaskDistributionController {
   ) {}
   @Get('my-tasks')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.CONTRIBUTOR)
+  @Roles(Role.CONTRIBUTOR, Role.PROJECT_MANAGER)
   @ApiOperation({
     description:
-      'Api for getting the tasks assigned to the current user (for contributor)',
+      'Api for getting the tasks assigned to the current user (for contributor and project manager)',
     summary: 'Get my tasks',
   })
   @ApiResponse({ status: 200, description: 'My tasks', type: [TaskStatus] })

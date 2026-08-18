@@ -128,10 +128,11 @@ export class AuthService {
     }
     if (
       user.role.name !== RoleEnum.CONTRIBUTOR &&
-      user.role.name !== RoleEnum.REVIEWER
+      user.role.name !== RoleEnum.REVIEWER &&
+      user.role.name !== RoleEnum.PROJECT_MANAGER
     ) {
       throw new UnauthorizedException(
-        'Only contributors and reviewers can sign in',
+        'Only contributors, reviewers, and project managers can sign in',
       );
     }
     const { access_token, refresh_token } = await this.generateToken(
